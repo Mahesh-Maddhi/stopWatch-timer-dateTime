@@ -153,6 +153,7 @@ setInterval(() => {
 let timerInput = document.getElementById("timerInput");
 let secondsTime = document.getElementById("secondsTime");
 let reset = document.getElementById("reset");
+let progress = document.getElementById("progress");
 
 function milliseconds() {
     let ms = 10
@@ -173,6 +174,7 @@ timerInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         timerInput.classList.add("invisible");
         reset.classList.remove("invisible");
+        progress.classList.remove("invisible");
         document.getElementById("Status").textContent = "";
         let time = parseInt(timerInput.value);
         let sec = time;
@@ -181,6 +183,7 @@ timerInput.addEventListener("keydown", (event) => {
         let secId = setInterval(() => {
             milliseconds();
             sec -= 1;
+            progress.value = (sec/time)*100;
             if (sec > 9) { secondsTime.textContent = sec; }
             else { secondsTime.textContent = "0" + sec; }
             //reset
@@ -189,6 +192,7 @@ timerInput.addEventListener("keydown", (event) => {
                     timerInput.classList.remove("invisible");
                     reset.classList.add("invisible");
                     secondsTime.textContent = "00";
+                    progress.classList.add("invisible");
             }
             if (sec <= 0) {
                 clearInterval(secId);
@@ -196,6 +200,7 @@ timerInput.addEventListener("keydown", (event) => {
                     document.getElementById("Status").textContent = "Your time is up!";
                     timerInput.classList.remove("invisible");
                     reset.classList.add("invisible");
+                    progress.classList.add("invisible");
 
                 }, 1000);
 
