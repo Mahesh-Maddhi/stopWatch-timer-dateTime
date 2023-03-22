@@ -202,9 +202,10 @@ timerInput.addEventListener("keydown", (event) => {
             }
             if (sec < 1) {
                 clearInterval(secId);
-                progress.classList.add("invisible");
+                
                 setTimeout(() => {
                     document.getElementById("Status").textContent = "Your time is up!";
+                    progress.classList.add("invisible");
                     timerInput.classList.remove("invisible");
                     reset.classList.add("invisible");
                     progress.value = 100;
