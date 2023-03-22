@@ -79,6 +79,9 @@
     border-width: 0px 0px 3px 0px;
 
 }
+.tab:hover{
+    cursor: pointer;
+}
 .selected{
 
     border: 0px solid rgb(0, 125, 23);
