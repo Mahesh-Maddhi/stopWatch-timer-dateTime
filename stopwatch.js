@@ -1,5 +1,6 @@
 
 //  stop watch 
+{
 let minutes = document.getElementById("minutes");
 let seconds = document.getElementById("seconds");
 let startButton = document.getElementById("startButton");
@@ -110,9 +111,10 @@ clearBtn.onclick = () => {
 
 
 }
-
+}
 // date time
 
+{
 let timeE = document.getElementById("time");
 let dateE = document.getElementById("date");
 let dayE = document.getElementById("day");
@@ -147,9 +149,9 @@ setInterval(() => {
 
 }, 1000);
 
-
+}
 // timer
-
+{
 let timerInput = document.getElementById("timerInput");
 let secondsTime = document.getElementById("secondsTime");
 let reset = document.getElementById("reset");
@@ -172,20 +174,23 @@ function milliseconds() {
 timerInput.addEventListener("keydown", (event) => {
 
     if (event.key === "Enter") {
+        document.getElementById("Status").textContent = "";
+        let time = parseInt(timerInput.value);
+        let sec = time-1;
+        if(time > 0){
         timerInput.classList.add("invisible");
         reset.classList.remove("invisible");
         progress.classList.remove("invisible");
-        document.getElementById("Status").textContent = "";
-        let time = parseInt(timerInput.value);
-        let sec = time;
         milliseconds();
         secondsTime.textContent = sec;
+        progress.value = ((sec+1)/time)*100;
         let secId = setInterval(() => {
             milliseconds();
+            progress.value = ((sec)/time)*100;
             sec -= 1;
-            progress.value = (sec/time)*100;
             if (sec > 9) { secondsTime.textContent = sec; }
-            else { secondsTime.textContent = "0" + sec; }
+            else { secondsTime.textContent = "0" + sec;}
+            
             //reset
             reset.onclick = () => {
                 clearInterval(secId);
@@ -193,20 +198,28 @@ timerInput.addEventListener("keydown", (event) => {
                     reset.classList.add("invisible");
                     secondsTime.textContent = "00";
                     progress.classList.add("invisible");
+                    progress.value = 100;
             }
-            if (sec <= 0) {
+            if (sec < 1) {
                 clearInterval(secId);
+                progress.classList.add("invisible");
                 setTimeout(() => {
                     document.getElementById("Status").textContent = "Your time is up!";
                     timerInput.classList.remove("invisible");
                     reset.classList.add("invisible");
-                    progress.classList.add("invisible");
+                    progress.value = 100;
+                    
 
                 }, 1000);
 
             }
 
         }, 1000);
+    }else{
+        alert("enter a valid format");
+        timerInput.value = "";
+        return;
+    }
 
         timerInput.value = "";
 
@@ -214,12 +227,12 @@ timerInput.addEventListener("keydown", (event) => {
 
 })
 
-
+}
 
 
 
 // sectionswitch
-
+{
 let timebtn = document.getElementById("timeBtn");
 let timerbtn = document.getElementById("timerBtn");
 let stopBtn = document.getElementById("stop");
@@ -255,8 +268,4 @@ stopBtn.onclick = () => {
     stopBtn.classList.add("selected");
 }
 
-
-
-
-
-
+}
